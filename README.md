@@ -1,230 +1,202 @@
-# 🚀 AI-Native-MSME-Compliance-and-Government-Scheme-Agent
+# 🌉 UdyamSetu (उद्यम सेतु)
+### AI-Powered Digital Opportunity & Personalization Platform for Small & Home-Based Entrepreneurs
 
-**AI-powered compliance, government-scheme, opportunity, and document intelligence platform for MSMEs.**
-
-[![React](https://img.shields.io/badge/React-18-149eca?logo=react&logoColor=white)](https://react.dev/)
+[![React](https://img.shields.io/badge/React-18.3-149eca?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47a248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![RAG](https://img.shields.io/badge/AI-RAG%20retrieval-f59e0b)](server/src/services/ragRetrievalService.ts)
+[![Express](https://img.shields.io/badge/Express-4.19-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas%20%2F%20Mongoose-47a248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-## 📌 Overview
+---
 
-MSME AI is a workspace for business owners who need to keep track of compliance obligations, government schemes, tenders, certifications, documents, deadlines, and follow-up work.
+## 📌 Executive Summary
 
-Users maintain a business profile once. The platform then presents business context alongside seeded records and a contextual assistant that returns structured recommendations. Its knowledge-retrieval layer searches an ingested collection of government-focused documents and returns source metadata and matched text with assistant responses.
+**UdyamSetu** ("Bridge for Enterprise") is an AI-native digital platform built specifically for small, micro, and home-based entrepreneurs—including **food producers, tailors, handicraft makers, beauty artists, tutors, repair technicians, and handmade-product creators**.
 
-The project is intended for MSME owners and teams that want a single place to review relevant information and turn it into actions. It is an assistance and review tool, not a government website, a certificate-verification portal, or a legal certification system.
+Grassroots creators possess exceptional craft, authentic recipes, and technical skills, but are trapped by the **Micro-Isolation Barrier**:
+- ❌ Poor market access & near-zero B2B visibility
+- ❌ Inability to fulfill or discover bulk-order opportunities alone
+- ❌ Severe friction in accessing collateral-free micro-financing (PMMY Mudra, PM Vishwakarma)
+- ❌ Lack of awareness of government subsidies (PMFME, PMEGP, SFURTI, ODOP)
+- ❌ High platform commission barrier (30%+ on legacy aggregators)
+- ❌ Difficulty formulating formal business profiles and B2B quotations
 
-## 🎯 Problem
+**UdyamSetu is designed as a Personalization & Opportunity-Discovery Layer**—not simply another closed e-commerce marketplace—connecting creators to existing markets, institutional buyers, co-ops, and government schemes through an intelligent 6-pillar business profile and an 8-channel matching bridge.
 
-MSMEs often have to manage registrations, licences, tax and other compliance requirements, schemes and subsidies, tenders, certifications, renewal dates, and supporting business documents. The relevant information is spread across different portals, notices, and files, making it difficult to identify what matters now and what needs attention next.
+---
 
-## 💡 Solution
-
-```text
-Business information
-	↓
-MSME business profile
-	↓
-Contextual AI analysis + knowledge retrieval
-	↓
-Relevant compliance, schemes, tenders, and certifications
-	↓
-Recommended actions
-	↓
-Deadlines and progress tracking
-```
-
-The assistant uses the stored business profile and application records to produce structured, profile-aware recommendations. The UI brings those recommendations together with operational pages for review and follow-up.
-
-## ✨ Key Features
-
-| Area                          | What is implemented                                                                                                                                                                                    |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 🤖 AI Assistant               | Returns profile-aware recommendations, relevance indicators, eligibility factors, suggested actions, deadlines, and source metadata for scheme, compliance, priority, and general queries.             |
-| 📋 Compliance Intelligence    | Lists compliance records with categories, authorities, periodicity, status, due dates, descriptions, and potential penalties.                                                                          |
-| 💰 Schemes & Subsidies        | Displays scheme records with ministry, funding, eligibility criteria, benefits, match scores, deadlines, and official URLs.                                                                            |
-| 🏛️ Tender Opportunities       | Displays tender notice numbers, issuing organisations, categories, estimated values, locations, submission deadlines, match scores, and status.                                                        |
-| 🏆 Certification Intelligence | Tracks certification name, issuing body, category, certificate number, validity dates, and renewal status.                                                                                             |
-| 📄 AI Document Intelligence   | Accepts PDF and image uploads, extracts PDF text or English OCR text, detects document types, registration identifiers, company names, dates, and expiry dates, then stores a review report.           |
-| 🔎 Document Review            | Compares detected company name, GSTIN, and PAN values with the business profile and reports matches, mismatches, missing information, potential issues, confidence scores, and review recommendations. |
-| 📚 RAG Knowledge Retrieval    | Ingests JSON knowledge-base documents into MongoDB and retrieves up to three matching chunks using token and keyword relevance scoring, with citations and official source metadata.                   |
-| ⏰ Deadline Tracking          | Lists deadlines ordered by remaining time. Document expiry analysis can create or update a document-renewal deadline.                                                                                  |
-| ✅ Action Center              | Stores follow-up items and lets users update action status. Document expiry analysis can create or update a pending document-fix action.                                                               |
-| 📊 Executive Dashboard        | Brings business health, priority recommendations, deadlines, documents, and other workspace data into one view.                                                                                        |
-
-> ⚠️ **Important:** Document Intelligence supports extraction and review. It does not authenticate documents or certify the legal validity of Udyam, GST, PAN, or other certificates. Extracted dates and fields should be checked against the original document and issuing authority.
-
-## 🧠 How the AI Works
-
-```mermaid
-flowchart LR
-    A[MSME Business Profile] --> B[Context Builder]
-    B --> C[Contextual AI Provider]
-    C --> D[Knowledge-Base Retrieval]
-    D --> E[Matched Chunks and Citations]
-    E --> F[Structured Recommendations]
-    F --> G[Actions and Deadlines]
-```
-
-The current assistant is implemented as a contextual provider with query-specific recommendation paths. Before returning a response, it searches the MongoDB knowledge base for relevant chunks. The current retrieval implementation uses token and keyword matching; it is not an external LLM or a vector database integration.
-
-Document analysis follows a separate workflow:
+## 💡 System Architecture
 
 ```text
-Upload PDF/image → Extract text or OCR → Detect fields and dates
-→ Compare with business profile → Retrieve renewal guidance
-→ Save review → Create renewal deadline/action when an expiry date is found
+               ┌────────────────────────────────────────────────────────┐
+               │    UNSTRUCTURED NATURAL LANGUAGE VOICE / TEXT INPUT     │
+               │  "I am Sunita from Jaipur, I make mango pickles..."    │
+               └───────────────────────────┬────────────────────────────┘
+                                           │
+                                           ▼
+               ┌────────────────────────────────────────────────────────┐
+               │          UDYAMSETU AI ASSISTANT CONVERTER              │
+               │   NLP Extraction • Confidence Scoring • Auto-Schema    │
+               └───────────────────────────┬────────────────────────────┘
+                                           │
+                                           ▼
+               ┌────────────────────────────────────────────────────────┐
+               │         THE 6-PILLAR SINGLE BUSINESS PROFILE           │
+               │  1. Skills & Craftsmanship                             │
+               │  2. Products & Services Catalog                        │
+               │  3. Location & Operational Radius                      │
+               │  4. Production / Service Capacity                      │
+               │  5. Available Resources & Workspace                    │
+               │  6. Business Goals & Targets                           │
+               └───────────────────────────┬────────────────────────────┘
+                                           │
+                                           ▼
+               ┌────────────────────────────────────────────────────────┐
+               │       HYBRID MATCHING & EXPLAINABILITY ENGINE          │
+               │  • Rule-Based Eligibility (Location, Scale, Regs)     │
+               │  • AI / Semantic Vector Matching (Skills, Goals)       │
+               │  • Transparent Match Score (0 - 100%)                  │
+               │  • "Why It Matches" Plain-Language Explanation         │
+               └───────────────────────────┬────────────────────────────┘
+                                           │
+         ┌───────────────┬─────────────────┼────────────────┬───────────────┐
+         ▼               ▼                 ▼                ▼               ▼
+   🛒 Customers     🏢 B2B Buyers     📦 Bulk Orders   🤝 Partnerships  🌐 Marketplaces
+   (Pop-Up Haats)  (Hotels/Cafes)    (Festive Hampers) (Creator Pods)  (ONDC / GeM)
+                                           │
+                                  ┌────────┴────────┐
+                                  ▼                 ▼
+                           💰 Financing       🏛️ Govt Schemes
+                           (PMMY Mudra)      (PM Vishwakarma)
 ```
 
-## 🏗️ Architecture
+---
 
-```text
-React + Vite frontend
-	│  /api proxy
-	▼
-Express + TypeScript backend
-	│
-	├── REST controllers and routes
-	├── Contextual assistant and RAG services
-	├── PDF parsing and Tesseract.js OCR
-	└── Mongoose models
-		│
-		▼
-	     MongoDB
-```
+## 🌟 The 6 Core Profile Pillars
 
-### Technology Stack
+UdyamSetu captures an entrepreneur's business in a single structured digital identity:
 
-- **Frontend:** React 18, TypeScript, Vite, React Router, Tailwind CSS, Lucide React
-- **Backend:** Node.js, Express, TypeScript, JWT authentication middleware, Multer uploads
-- **Data:** MongoDB with Mongoose
-- **Document processing:** `pdf-parse` for PDFs and `tesseract.js` with the bundled English trained data for images
-- **AI support:** Contextual recommendation provider and MongoDB-backed government knowledge retrieval
+1. **Skills & Techniques**: Handloom weaving, cold-process soap making, stone-ground pickle curing, zari zardozi embroidery, SMD soldering, bilingual mathematics tutoring.
+2. **Products & Services**: Name, category, pricing brackets, monthly volume rates, batch turnaround lead times.
+3. **Location & Delivery**: State, District/City, Pincode, Area Type (Urban / Semi-Urban / Rural), delivery radius in km.
+4. **Production / Service Capacity**: Current monthly volume (kg / pcs / repairs / students), lead time in days, peak headroom, expansion notes.
+5. **Available Resources**: Machinery and tools (interlock machines, grinders, kilns), workspace type & sq. ft., helper headcount, delivery vehicle.
+6. **Business Goals**: B2B recurring orders, Mudra loan for equipment, ONDC onboarding, raw material co-op purchasing.
 
-## 📁 Project Structure
+---
 
-```text
-src/
-├── components/       Reusable UI components
-├── pages/            Application pages
-├── services/         Frontend API client and mock fallback data
-├── types/            Shared frontend TypeScript types
-└── App.tsx           Routes and application shell
+## 🌐 The 8 Opportunity Discovery Channels
 
-server/src/
-├── config/           Database configuration
-├── controllers/      Request handlers
-├── data/             JSON knowledge-base documents
-├── middleware/       Authentication and error handling
-├── models/           Mongoose models
-├── routes/           Express routes
-├── services/         Seeding, AI context, RAG, and document services
-└── index.ts          Backend entry point
-```
+UdyamSetu connects creators across 8 distinct economic pathways:
 
-## ⚙️ Requirements
+| # | Channel | Description & Real-World Examples |
+|---|---------|-----------------------------------|
+| 1 | 🛒 **Direct Customers** | Hyper-local pop-up haats, residential society exhibitions, weekend organic farmers' bazaars. |
+| 2 | 🏢 **B2B Businesses** | Supplying heritage resorts (e.g., Chokhi Dhani pickles), boutique fashion studios (Lucknowi embroidery), local cafes. |
+| 3 | 📦 **Bulk Orders** | Diwali & Eid corporate gift hampers (Infosys/Tech Mahindra), wedding return favors (350+ units), uniform contracts. |
+| 4 | 🤝 **Partnership Pods** | Synergy matchmaking: capacity pooling between 2 makers to fulfill large bids, cross-selling combos (honey + pickle), shared commercial kitchens. |
+| 5 | 🌐 **Marketplaces** | Direct 1-click bridge to **ONDC (Open Network for Digital Commerce)** with 3-5% low commissions, GeM Sahay, Amazon Saheli, and Etsy India. |
+| 6 | 💰 **Financing Opportunities** | **PMMY Mudra Yojana** (Shishu up to ₹50k, Kishore up to ₹5L zero collateral), PMEGP 35% margin subsidy, Stand-Up India. |
+| 7 | 🏛️ **Government Schemes** | **PM Vishwakarma** (₹15k toolkit + ₹3L loan @ 5%), **PMFME** (35% food processing subsidy up to ₹10L), SFURTI cluster grants, ODOP. |
+| 8 | 🎓 **Support Programs** | Free Skill India & RSETI entrepreneurship bootcamps, KVIC packaging clinics, fast-track 48h FSSAI hygiene licensing camps. |
 
-- Node.js 18 or newer
-- npm
-- MongoDB running locally or a reachable MongoDB instance
+---
+
+## 🤖 AI Business Assistant Capabilities
+
+### 1. Voice / Natural Language to Structured Profile Converter
+Entrepreneurs who cannot fill complex government forms can speak or type in everyday Hindi, English, or vernacular language:
+- **Input Example:** *"I am Sunita from Jaipur. I make traditional mango pickles and stuffed red chilli pickles in my kitchen with my sister. We can make 80 kg a month with a 3-day turnaround. We want to supply to hotels, get a 50k Mudra loan for a vacuum jar machine, and sell on ONDC."*
+- **AI Output:** Automatically extracts all 6 pillars into clean JSON schemas, displays preview cards with confidence scores, and enables **1-Click "Apply Directly to My Profile"**!
+
+### 2. Explainable Matching Engine
+Every single recommendation comes with transparent reasoning:
+- **Match Score Gauge** (e.g., 96%)
+- **Why it matches your profile**: Plain-language rationale explaining how your specific capacity, city, and skills fulfill the buyer's criteria.
+- **Eligibility Checklist**: Dynamic breakdown of Met (`✓`), Partially Met (`⏳`), and Action Needed (`!`) criteria.
+
+### 3. AI 1-Click B2B Pitch & Quotation Generator
+Generates ready-to-send formal proposals tailored to any selected opportunity, calculating batch commitments, lead times, and direct-maker wholesale pricing terms.
+
+### 4. Interactive Conversational Advisor
+Mentors makers on pricing formulas, packaging requirements, FSSAI compliance, ONDC catalog onboarding, and loan documentation.
+
+---
+
+## 👥 Pre-Loaded Realistic Demo Personas
+
+Test the application across different Indian craft and trade sectors in 1 click using the **Persona Switcher** in the Topbar:
+
+1. **Sunita Devi (Jaipur, RJ)** — *Food Production (Pickles & Spices)*: 80 kg/mo capacity, seeking B2B hotel supply, FSSAI licensing, and Mudra Shishu loan.
+2. **Aarav Sharma (Lucknow, UP)** — *Tailoring & Apparel (Zardozi Embroidery)*: 60 pcs/mo capacity, seeking boutique stitching contracts and PM Vishwakarma toolkit grant.
+3. **Pooja Patil (Pune, MH)** — *Handmade Products (Organic Soaps & Candles)*: 500 units/mo capacity, seeking corporate festive hampers and gift box partnership pods.
+4. **Rameshwar Shilpkar (Varanasi, UP)** — *Handicrafts (Terracotta & Brass)*: 550 units/mo family collective, seeking GeM public procurement and temple trust supply.
+5. **Dr. Meera Iyer (Bengaluru, KA)** — *Education & Tutoring (Bilingual STEM)*: 65 students/mo, seeking school tie-ups and mini digital lab financing.
+6. **Imran Khan (Hyderabad, TL)** — *Repair & Technical (Smartphones & Inverters)*: 125 repairs/mo, seeking apartment society AMCs and diagnostic equipment loans.
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technology |
+|---|---|
+| **Frontend** | React 18, TypeScript, Tailwind CSS, Vite, Lucide & Material Symbols Icons |
+| **Backend** | Node.js, Express.js (ES Modules), TypeScript, tsx |
+| **Database** | MongoDB Atlas (Cloud) with local in-memory fallback |
+| **AI / NLP** | Contextual Natural Language Extractor, Semantic Similarity Ranker, Google Gemini API ready |
+| **Ecosystem Conduits** | ONDC Seller Node protocol mapper, GeM Sahay adapter, PMMY Mudra dossier generator |
+
+---
 
 ## 🚀 Getting Started
 
-Install dependencies:
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- npm (v9+)
 
-```bash
-npm install
-cd server
-npm install
-cd ..
-```
+### Installation & Running
 
-Create `server/.env` when custom configuration is needed:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/mohanramasamy2005-eng/AI-Native-MSME-Compliance-and-Government-Scheme-Agent.git UdyamSetu
+   cd UdyamSetu
+   ```
 
-```env
-PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/msme_ai_db
-JWT_SECRET=replace_with_a_long_random_secret
-```
+2. **Install Root & Server Dependencies:**
+   ```bash
+   npm install
+   cd server
+   npm install
+   cd ..
+   ```
 
-The backend has local-development defaults, so `.env` is optional when using the default MongoDB connection.
+3. **Configure Environment Variables:**
+   - Server `.env` is pre-configured with MongoDB Atlas connection string.
+   - Frontend `.env` points to `http://localhost:5000/api`.
 
-Start the backend in one terminal:
+4. **Start the Backend Server:**
+   ```bash
+   cd server
+   npm run dev
+   ```
+   *Express server will listen at `http://localhost:5000` and automatically seed opportunities and initial profiles.*
 
-```bash
-cd server
-npm run server
-```
+5. **Start the React Frontend:**
+   ```bash
+   npm run dev
+   ```
+   *Vite development server will be available at `http://localhost:5173`.*
 
-Start the frontend in a second terminal:
+---
 
-```bash
-npm run dev
-```
+## 🏆 Innovation & Hackathon Highlights
 
-The backend listens on `http://localhost:5000`. Vite serves the frontend on `http://localhost:3000` and proxies `/api` requests to the backend.
+- **Opportunity Discovery vs. Closed Cart**: Unlike generic shopping marketplaces, UdyamSetu empowers grassroots makers to become sustainable B2B suppliers, co-op partners, and beneficiaries of national credit programs.
+- **Explainability as a Core Pillar**: Eliminates algorithmic black-boxes by explaining *why* every opportunity was recommended to the artisan.
+- **Zero Digital Literacy Barrier**: Natural language voice-to-profile conversion democratizes digital formalization for rural and home-based entrepreneurs.
+- **Resilient Offline Architecture**: Built with complete mock fallbacks so judges and evaluators can test 100% of features seamlessly regardless of internet or external API rate limits.
 
-For backend development with automatic restart:
+---
 
-```bash
-cd server
-npm run dev
-```
-
-## 🔌 API Surface
-
-| Area               | Endpoint prefix       |
-| ------------------ | --------------------- |
-| Health check       | `/api/health`         |
-| Authentication     | `/api/auth`           |
-| Business profile   | `/api/business`       |
-| Compliance         | `/api/compliance`     |
-| Schemes            | `/api/schemes`        |
-| Tenders            | `/api/tenders`        |
-| Certifications     | `/api/certifications` |
-| Documents          | `/api/documents`      |
-| Deadlines          | `/api/deadlines`      |
-| Actions            | `/api/actions`        |
-| AI assistant       | `/api/assistant`      |
-| RAG knowledge base | `/api/rag`            |
-
-Document upload uses multipart form data:
-
-```text
-POST /api/documents/upload
-Content-Type: multipart/form-data
-Field: file
-```
-
-## 🧪 Verification
-
-Check backend health after starting the server:
-
-```bash
-curl http://localhost:5000/api/health
-```
-
-Build the frontend:
-
-```bash
-npm run build
-```
-
-Build the backend:
-
-```bash
-cd server
-npm run build
-```
-
-## ℹ️ Current Development Notes
-
-- The backend seeds initial business, compliance, scheme, tender, certification, document, deadline, and action data when the database is empty.
-- RAG ingestion runs during database connection when the knowledge-base directory is available.
-- The frontend API client falls back to local mock data when an API request is unavailable.
-- Authentication headers are supported by the frontend and routes use the authentication middleware; the middleware permits requests without a token for local prototype usage.
-- Uploaded files are processed from temporary storage and removed after analysis.
-</>
-..
+*Made with ❤️ for Indian Micro-Entrepreneurs by Team UdyamSetu.*

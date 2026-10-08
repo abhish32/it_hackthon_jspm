@@ -5,7 +5,9 @@ export type ComplianceStatus =
   | "due_soon"
   | "overdue"
   | "critical";
+
 export type PriorityLevel = "critical" | "high" | "medium" | "low";
+
 export type SectorType =
   | "Manufacturing"
   | "Services"
@@ -14,25 +16,195 @@ export type SectorType =
   | "Agri-Processing"
   | "Technology";
 
+export type BusinessType =
+  | "Food Production"
+  | "Tailoring & Apparel"
+  | "Handicrafts & Art"
+  | "Beauty & Wellness"
+  | "Education & Tutoring"
+  | "Repair & Technical"
+  | "Handmade Products"
+  | "Other";
+
+export interface ProductServiceItem {
+  name: string;
+  category: string;
+  priceRange?: string;
+  capacityPerMonth?: string;
+  unit?: string;
+  description?: string;
+}
+
+export interface LocationDetails {
+  address: string;
+  city: string;
+  district: string;
+  state: string;
+  pincode: string;
+  areaType: "Urban" | "Semi-Urban" | "Rural";
+  serviceRadiusKm: number;
+}
+
+export interface CapacityDetails {
+  monthlyVolume: string;
+  unit: string;
+  leadTimeDays: number;
+  peakCapacity?: string;
+  scalabilityNotes?: string;
+}
+
+export interface ResourceDetails {
+  equipment: string[];
+  workspaceType: string;
+  workspaceAreaSqFt?: number;
+  workforceCount: number;
+  hasDeliveryVehicle: boolean;
+  rawMaterialAccess?: string;
+}
+
+export interface Registrations {
+  udyam?: string;
+  fssai?: string;
+  artisanCard?: string;
+  gstin?: string;
+  pan?: string;
+}
+
 export interface BusinessProfile {
-  id: string;
+  id?: string;
+  _id?: string;
+  entrepreneurName: string;
   businessName: string;
   tradeName: string;
+  tagline?: string;
+  businessType: BusinessType;
   entityType: string;
-  sector: SectorType;
-  location: string;
-  state: string;
-  district: string;
+
+  // The 6 Core Pillars
+  skills: string[];
+  productsServices: ProductServiceItem[];
+  locationDetails: LocationDetails;
+  capacityDetails: CapacityDetails;
+  resourceDetails: ResourceDetails;
+  businessGoals: string[];
+
+  // Support & Readiness
+  registrations: Registrations;
   turnoverFY: string;
   turnoverValue: number;
+  readinessScore: number;
+  phone?: string;
+  email?: string;
+  languagesSpoken: string[];
+  notes?: string;
+
+  // Legacy compatibility fields
+  sector: SectorType | string;
+  location: string;
+  district: string;
+  state: string;
   udyamStatus: "Active" | "Pending" | "Not Registered";
   udyamRegistrationNo?: string;
   gstin?: string;
   pan?: string;
   employeeCount: number;
   incorporationYear: number;
-  nextRenewal: string;
+  nextRenewal?: string;
   complianceHealthScore: number;
+}
+
+export type OpportunityType =
+  | "customer"
+  | "business"
+  | "bulk_order"
+  | "partnership"
+  | "marketplace"
+  | "financing"
+  | "government_scheme"
+  | "support_program";
+
+export interface OpportunityItem {
+  _id?: string;
+  id?: string;
+  title: string;
+  type: OpportunityType;
+  category: string;
+  organization: string;
+  description: string;
+  locationScope: {
+    state?: string;
+    city?: string;
+    isPanIndia: boolean;
+    serviceRadiusKm?: number;
+  };
+  estimatedValue: string;
+  capacityNeeded?: string;
+  requiredSkills: string[];
+  eligibleCategories: string[];
+  eligibilityCriteria: string[];
+  keyBenefits: string[];
+  deadline?: string;
+  actionLabel: string;
+  officialUrl?: string;
+  contactPerson?: string;
+  contactEmailOrPhone?: string;
+  tags: string[];
+  partnershipType?: "production_pooling" | "raw_material_group" | "cross_selling" | "shared_logistics";
+}
+
+export interface EligibilityFactor {
+  criterion: string;
+  status: "met" | "partially_met" | "action_needed";
+  note: string;
+}
+
+export interface OpportunityMatchResult {
+  opportunity: OpportunityItem;
+  matchScore: number;
+  whyMatches: string;
+  eligibilityChecklist: EligibilityFactor[];
+  valueProposition: string;
+  recommendedNextStep: string;
+}
+
+export interface ExtractedStructuredProfile {
+  entrepreneurName: string;
+  businessName: string;
+  tradeName: string;
+  businessType: BusinessType | string;
+  skills: string[];
+  productsServices: ProductServiceItem[];
+  locationDetails: LocationDetails;
+  capacityDetails: CapacityDetails;
+  resourceDetails: ResourceDetails;
+  businessGoals: string[];
+  readinessScore: number;
+  confidence: number;
+  summary: string;
+  immediateRecommendations: string[];
+}
+
+export interface GeneratedPitch {
+  recipientTitle: string;
+  subject: string;
+  salutation: string;
+  executiveSummary: string;
+  offeredCapacity: string;
+  turnaroundTime: string;
+  qualityAssurance: string;
+  pricingProposal: string;
+  callToAction: string;
+}
+
+export interface AdvisorChatResponse {
+  replyText: string;
+  actionableSteps: string[];
+  suggestedQuestions: string[];
+  relevantSchemesOrMarketplaces?: string[];
+}
+
+export interface DemoPersona extends BusinessProfile {
+  id: string;
 }
 
 export interface ComplianceItem {
@@ -204,4 +376,6 @@ export interface ChatMessage {
   suggestions?: string[];
   referencedDocs?: string[];
   retrievedCitations?: RagCitation[];
+  actionableSteps?: string[];
+  relevantSchemes?: string[];
 }

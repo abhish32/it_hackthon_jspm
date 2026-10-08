@@ -16,6 +16,7 @@ import deadlineRoutes from './routes/deadlineRoutes.js';
 import actionRoutes from './routes/actionRoutes.js';
 import aiRoutes from './routes/aiRoutes.js';
 import ragRoutes from './routes/ragRoutes.js';
+import opportunityRoutes from './routes/opportunityRoutes.js';
 
 dotenv.config();
 
@@ -47,6 +48,7 @@ app.use('/api/deadlines', deadlineRoutes);
 app.use('/api/actions', actionRoutes);
 app.use('/api/assistant', aiRoutes);
 app.use('/api/rag', ragRoutes);
+app.use('/api/opportunities', opportunityRoutes);
 
 // Global Error Handler
 app.use(errorHandler);

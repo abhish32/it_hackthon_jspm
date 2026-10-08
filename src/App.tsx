@@ -7,6 +7,9 @@ import { OnboardingPage } from './pages/OnboardingPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { BusinessPage } from './pages/BusinessPage';
 import { AssistantPage } from './pages/AssistantPage';
+import { OpportunitiesPage } from './pages/OpportunitiesPage';
+import { PartnershipsPage } from './pages/PartnershipsPage';
+import { BridgesPage } from './pages/BridgesPage';
 import { CompliancePage } from './pages/CompliancePage';
 import { SchemesPage } from './pages/SchemesPage';
 import { TendersPage } from './pages/TendersPage';
@@ -30,6 +33,9 @@ export const App: React.FC = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/business" element={<BusinessPage />} />
           <Route path="/assistant" element={<AssistantPage />} />
+          <Route path="/opportunities" element={<OpportunitiesPage />} />
+          <Route path="/partnerships" element={<PartnershipsPage />} />
+          <Route path="/bridges" element={<BridgesPage />} />
           <Route path="/compliance" element={<CompliancePage />} />
           <Route path="/schemes" element={<SchemesPage />} />
           <Route path="/tenders" element={<TendersPage />} />
